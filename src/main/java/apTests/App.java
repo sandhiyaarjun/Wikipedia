@@ -4,9 +4,15 @@
  */
 package apTests;
 import java.net.MalformedURLException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class App {
+    // private TestCases tests;
+    // private WebDriver driverwikipedia;
+
     public void getGreeting() throws InterruptedException, MalformedURLException {
         TestCases tests = new TestCases(); // Initialize your test class
 
@@ -14,11 +20,99 @@ public class App {
 
         tests.testCase01();
 
-        //END Tests
+        tests.getDriver().get("https://www.wikipedia.org/");
+
+        Thread.sleep(3000);
+        String currentUrl = tests.getDriver().getCurrentUrl();
+        if(currentUrl.contains("wikipedia")){
+            System.out.println("successfully opened 'wikipedia' page");
+        }else{
+            System.out.println("error in opening 'wikipedia' page");
+        }
+        
+
+        tests.testCase02();
+
+        tests.getDriver().get("https://www.wikipedia.org/");
+        WebElement headerElement = tests.getDriver().findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/div[1]/h1/span"));
+        String headerText = headerElement.getText();
+        if(headerText.contains("Wikipedia")){
+            System.out.println("Header text contain 'Wikipedia' title");
+        }else{
+            System.out.println("Header text doesnot contain 'Wikipedia' title");
+        }
+
+        WebElement footerElement = tests.getDriver().findElement(By.xpath("//p[@class='site-license']"));
+        WebElement termsOfUse = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[2]"));
+        WebElement privacyPolicy = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[3]"));
+        if(termsOfUse.isDisplayed() && privacyPolicy.isDisplayed()){
+            System.out.println("Footer contain 'Terms Of Use' and 'Privacy Policy' ");
+        }else{
+            System.out.println("Footer  doesnot contain  'Terms Of Use' and 'Privacy Policy' ");
+        }
 
 
+        tests.testCase03();
+
+
+        tests.getDriver().get("https://www.wikipedia.org/");
+        WebElement searchBar01 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
+        searchBar01.sendKeys("Apple Inc.");
+        searchBar01.submit();
+
+        WebElement founderText = tests.getDriver().findElement(By.xpath("//a[text()='Steve Jobs']"));
+        boolean steveJobsIdentified = founderText.getText().contains("Steve Jobs");
+        if(steveJobsIdentified){
+            System.out.println("Founders list contains 'Steve Jobs' name ");
+        }else{
+            System.out.println("Founders list doesnot contains 'Steve Jobs' name ");
+        }
+        
+
+        tests.testCase04();
+
+
+        tests.getDriver().get("https://www.wikipedia.org/");
+        WebElement searchBar02 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
+        searchBar02.sendKeys("Microsoft");
+        searchBar02.submit();
+
+        WebElement founderText01 = tests.getDriver().findElement(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/table[1]/tbody/tr[8]/td/div"));
+        boolean billGatesIdentified = founderText01.getText().contains("Bill_Gates");
+        if(billGatesIdentified){
+            System.out.println("Founder is 'Bill Gates' ");
+            WebElement clickName = tests.getDriver().findElement(By.xpath("//a[text()='Bill Gates']"));
+            clickName.click();
+
+            tests.getDriver().get("https://en.wikipedia.org/wiki/Bill_Gates");
+
+            String billGatesUrl = tests.getDriver().getCurrentUrl();
+            if(billGatesUrl.contains("Bill_Gates")){
+                System.out.println(" The Url contains ' Bill_Gates' ");
+            }else{
+                System.out.println(" The Url doesnot contains ' Bill_Gates' ");
+            }
+
+
+        tests.testCase05();
+
+        tests.getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
+        WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//input[@class='vector-dropdown-content']"));
+        mainMenu.click();
+        WebElement aboutWikipediaLink =  tests.getDriver().findElement(By.xpath("//*[@id='n-aboutsite']"));
+        aboutWikipediaLink.click();
+
+        String aboutWikipediaUrl = tests.getDriver().getCurrentUrl();
+        if(aboutWikipediaUrl.contains("About Wikipedia")){
+            System.out.println("The Url contains 'About Wikipedia' ");
+        }else{
+            System.out.println("The Url doesnot contain 'About Wikipedia' ");
+        }
+
+         //END Tests
         tests.endTest(); // End your test by clearning connections and closing browser
     }
+}
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
         new App().getGreeting();

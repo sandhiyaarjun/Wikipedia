@@ -49,5 +49,37 @@ public class TestCases {
         System.out.println("end Test case: testCase01");
     }
 
+    public void testCase02() {
+        System.out.println("Start Test case: testCase02");
+        driver.get("https://www.google.com");
+        System.out.println("end Test case: testCase02");
+    }
+
+
+    public void testCase03() {
+        System.out.println("Start Test case: testCase03");
+        driver.get("https://www.google.com");
+        System.out.println("end Test case: testCase03");
+    }
+
+
+    public void testCase04() {
+        System.out.println("Start Test case: testCase04");
+        driver.get("https://www.google.com");
+        System.out.println("end Test case: testCase04");
+    }
+
+
+    public void testCase05() {
+        System.out.println("Start Test case: testCase05");
+        driver.get("https://www.google.com");
+        System.out.println("end Test case: testCase05");
+    }
+
+    public RemoteWebDriver getDriver(){
+        return driver;
+    }
+
+
 }
 
