@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+// import org.openqa.selenium.remote.RemoteWebDriver;
 
 
 public class App {
@@ -65,9 +66,9 @@ public class App {
 
 
         tests.getDriver().get("https://www.wikipedia.org/");
-        WebElement searchBar01 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
-        searchBar01.sendKeys("apple inc.");
-        searchBar01.submit();
+        WebElement searchBar = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
+        searchBar.sendKeys("apple inc.");
+        searchBar.submit();
 
         WebElement founderText = tests.getDriver().findElement(By.xpath("//a[text()='Steve Jobs']"));
         boolean steveJobsIdentified = founderText.getText().contains("Steve Jobs");
@@ -82,15 +83,19 @@ public class App {
 
 
         tests.getDriver().get("https://www.wikipedia.org/");
-        WebElement searchBar02 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
-        searchBar02.sendKeys("Microsoft");
-        searchBar02.submit();
+        WebElement searchBar1 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
+        searchBar1.sendKeys("microsoft");
+        searchBar1.submit();
 
-        WebElement founderText01 = tests.getDriver().findElement(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/table[1]/tbody/tr[8]/td/div"));
-        boolean billGatesIdentified = founderText01.getText().contains("Bill_Gates");
+        WebElement founderText01 = tests.getDriver().findElement(By.xpath("//a[text()='Bill Gates']"));
+        boolean billGatesIdentified = founderText01.getText().contains("Bill Gates");
         if(billGatesIdentified){
-            System.out.println("Founder is 'Bill_Gates' ");
-            WebElement clickName = tests.getDriver().findElement(By.xpath("//a[text()='Bill_Gates']"));
+            System.out.println("Founder contain 'Bill_Gates' ");
+        }else{
+            System.out.println("Founder doesnot contain 'Bill_Gates' ");
+        }
+
+            WebElement clickName = tests.getDriver().findElement(By.xpath("//a[text()='Bill Gates']"));
             clickName.click();
 
             // tests.getDriver().get("https://en.wikipedia.org/wiki/Bill_Gates");
@@ -105,8 +110,8 @@ public class App {
 
         tests.testCase05();
 
-        tests.getDriver().get("https://www.wikipedia.org/");
-        WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//input[@class='vector-dropdown-content']"));
+        tests.getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
+        WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//*[@id='vector-main-menu-dropdown']/div"));
         mainMenu.click();
         WebElement aboutWikipediaLink =  tests.getDriver().findElement(By.xpath("//*[@id='n-aboutsite']"));
         aboutWikipediaLink.click();
@@ -121,7 +126,7 @@ public class App {
          //END Tests
         tests.endTest(); // End your test by clearning connections and closing browser
     }
-}
+
 
     public static void main(String[] args) throws InterruptedException, MalformedURLException {
         new App().getGreeting();
