@@ -43,8 +43,8 @@ public class App {
         }
 
         WebElement footerElement = tests.getDriver().findElement(By.xpath("//p[@class='site-license']"));
-        WebElement termsOfUse = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[2]"));
-        WebElement privacyPolicy = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[3]"));
+        WebElement termsOfUse = footerElement.findElement(By.xpath("//a[text()='Terms of Use']"));
+        WebElement privacyPolicy = footerElement.findElement(By.xpath("//a[text()='Privacy Policy']"));
         if(termsOfUse.isDisplayed() && privacyPolicy.isDisplayed()){
             System.out.println("Footer contain 'Terms of Use' and 'Privacy Policy' ");
         }else{
@@ -57,7 +57,7 @@ public class App {
 
         tests.getDriver().get("https://www.wikipedia.org/");
         WebElement searchBar01 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
-        searchBar01.sendKeys("Apple_Inc.");
+        searchBar01.sendKeys("apple inc.");
         searchBar01.submit();
 
         WebElement founderText = tests.getDriver().findElement(By.xpath("//a[text()='Steve Jobs']"));
@@ -73,7 +73,7 @@ public class App {
 
 
         tests.getDriver().get("https://www.wikipedia.org/");
-        WebElement searchBar02 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
+        WebElement searchBar02 = tests.getDriver().findElement(By.xpath("//input[@name='search']"));
         searchBar02.sendKeys("Microsoft");
         searchBar02.submit();
 
@@ -96,7 +96,7 @@ public class App {
 
         tests.testCase05();
 
-        tests.getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
+        tests.getDriver().get("https://www.wikipedia.org/");
         WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//input[@class='vector-dropdown-content']"));
         mainMenu.click();
         WebElement aboutWikipediaLink =  tests.getDriver().findElement(By.xpath("//*[@id='n-aboutsite']"));
