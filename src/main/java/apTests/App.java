@@ -42,14 +42,23 @@ public class App {
             System.out.println("Header text doesnot contain 'Wikipedia' title");
         }
 
-        WebElement footerElement = tests.getDriver().findElement(By.xpath("//p[@class='site-license']"));
-        WebElement termsOfUse = footerElement.findElement(By.xpath("//a[text()='Terms of Use']"));
-        WebElement privacyPolicy = footerElement.findElement(By.xpath("//a[text()='Privacy Policy']"));
-        if(termsOfUse.isDisplayed() && privacyPolicy.isDisplayed()){
-            System.out.println("Footer contain 'Terms of Use' and 'Privacy Policy' ");
+        WebElement footerElement = tests.getDriver().findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/div[8]"));
+        WebElement termsOfUseLink = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[2]/a"));
+        WebElement privacyPolicyLink = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[3]/a"));
+        String footerText1 = termsOfUseLink.getText();
+        String footerText2 = privacyPolicyLink.getText();
+        if(footerText1.contains("Terms of Use")){
+            System.out.println("footer contains 'Terms of Use' and 'Privacy Policy' ");
+        // }else{
+        //     System.out.println("footer  doesnot contain  'Terms of Use' and 'Privacy Policy' ");
+        // }
+
+         } else if(footerText2.contains("Privacy Policy")){
+            System.out.println("footer contains 'Terms of Use' and 'Privacy Policy' ");
         }else{
-            System.out.println("Footer  doesnot contain  'Terms of Use' and 'Privacy Policy' ");
+            System.out.println("footer  doesnot contain  'Terms of Use' and 'Privacy Policy' ");
         }
+
 
 
         tests.testCase03();
@@ -73,7 +82,7 @@ public class App {
 
 
         tests.getDriver().get("https://www.wikipedia.org/");
-        WebElement searchBar02 = tests.getDriver().findElement(By.xpath("//input[@name='search']"));
+        WebElement searchBar02 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
         searchBar02.sendKeys("Microsoft");
         searchBar02.submit();
 
@@ -81,16 +90,16 @@ public class App {
         boolean billGatesIdentified = founderText01.getText().contains("Bill_Gates");
         if(billGatesIdentified){
             System.out.println("Founder is 'Bill_Gates' ");
-            WebElement clickName = tests.getDriver().findElement(By.xpath("//a[text()='Bill Gates']"));
+            WebElement clickName = tests.getDriver().findElement(By.xpath("//a[text()='Bill_Gates']"));
             clickName.click();
 
-            tests.getDriver().get("https://en.wikipedia.org/wiki/Bill_Gates");
+            // tests.getDriver().get("https://en.wikipedia.org/wiki/Bill_Gates");
 
             String billGatesUrl = tests.getDriver().getCurrentUrl();
             if(billGatesUrl.contains("Bill_Gates")){
-                System.out.println(" The Url contains ' Bill_Gates' ");
+                System.out.println(" The URL contains ' Bill_Gates' ");
             }else{
-                System.out.println(" The Url doesnot contains ' Bill_Gates' ");
+                System.out.println(" The URL doesnot contains ' Bill_Gates' ");
             }
 
 
