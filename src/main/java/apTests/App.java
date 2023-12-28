@@ -46,9 +46,9 @@ public class App {
         WebElement termsOfUse = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[2]"));
         WebElement privacyPolicy = footerElement.findElement(By.xpath("//*[@id=\"www-wikipedia-org\"]/p/small[3]"));
         if(termsOfUse.isDisplayed() && privacyPolicy.isDisplayed()){
-            System.out.println("Footer contain 'Terms Of Use' and 'Privacy Policy' ");
+            System.out.println("Footer contain 'Terms of Use' and 'Privacy Policy' ");
         }else{
-            System.out.println("Footer  doesnot contain  'Terms Of Use' and 'Privacy Policy' ");
+            System.out.println("Footer  doesnot contain  'Terms of Use' and 'Privacy Policy' ");
         }
 
 
@@ -57,7 +57,7 @@ public class App {
 
         tests.getDriver().get("https://www.wikipedia.org/");
         WebElement searchBar01 = tests.getDriver().findElement(By.xpath("//input[@id='searchInput']"));
-        searchBar01.sendKeys("Apple Inc.");
+        searchBar01.sendKeys("Apple_Inc.");
         searchBar01.submit();
 
         WebElement founderText = tests.getDriver().findElement(By.xpath("//a[text()='Steve Jobs']"));
@@ -80,7 +80,7 @@ public class App {
         WebElement founderText01 = tests.getDriver().findElement(By.xpath("//*[@id=\"mw-content-text\"]/div[1]/table[1]/tbody/tr[8]/td/div"));
         boolean billGatesIdentified = founderText01.getText().contains("Bill_Gates");
         if(billGatesIdentified){
-            System.out.println("Founder is 'Bill Gates' ");
+            System.out.println("Founder is 'Bill_Gates' ");
             WebElement clickName = tests.getDriver().findElement(By.xpath("//a[text()='Bill Gates']"));
             clickName.click();
 
