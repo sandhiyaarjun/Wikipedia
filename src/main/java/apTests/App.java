@@ -111,16 +111,17 @@ public class App {
         tests.testCase05();
 
         tests.getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
-        WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//*[@id='vector-main-menu-dropdown']/div"));
+        //WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//*[@id='vector-main-menu-dropdown']/div"));
+        WebElement mainMenu =  tests.getDriver().findElement(By.xpath("//*[@id='vector-main-menu-dropdown-checkbox']"));
         mainMenu.click();
-        WebElement aboutWikipediaLink =  tests.getDriver().findElement(By.xpath("//*[@id='n-aboutsite']"));
-        aboutWikipediaLink.click();
+        WebElement aboutWikipedia = tests.getDriver().findElement(By.xpath("//*[@id='n-aboutsite']/a/span"));
+        aboutWikipedia.click();
 
         String aboutWikipediaUrl = tests.getDriver().getCurrentUrl();
-        if(aboutWikipediaUrl.contains("About Wikipedia")){
-            System.out.println("The Url contains 'About Wikipedia' ");
+        if(aboutWikipediaUrl.contains("About")){
+            System.out.println("The Url contains 'About' ");
         }else{
-            System.out.println("The Url doesnot contain 'About Wikipedia' ");
+            System.out.println("The Url doesnot contain 'About' ");
         }
 
          //END Tests
